@@ -9,6 +9,11 @@ li{
   gap: 0.5rem;
 }
 
+input:checked + span {
+  text-decoration: line-through;
+  color: #b9b9b9;
+}
+
 .App {
   text-align: center;
 }
