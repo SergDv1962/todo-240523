@@ -1,50 +1,28 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import "./App.css";
 import TodoList from "./components/TodoList";
 import InputFiel from "./components/InputFiel";
+import { addTodo } from "./components/store/todoSlice";
+
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const dispatch = useDispatch()
   const [text, setText] = useState("");
 
-  const addTodo = () => {
-    if (text.trim().length) {
-      setTodos([
-        ...todos,
-        {
-          id: new Date().toISOString(),
-          text,
-          completed: false,
-        },
-      ]);
-    }
-    setText("");
-  };
+  const addTask = () => {
+    dispatch(addTodo({ text }));
+    setText('');
+  }
 
-  const removeTodo = (todoId) => {
-    if (todos) setTodos(todos.filter((todo) => todo.id !== todoId));
-  };
-
-  const toggleTodoComplete = (todoId) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id !== todoId) return todo;
-        return {
-          ...todo,
-          completed: !todo.completed,
-        };
-      })
-    );
-  };
   return (
     <div className="App">
       <div className="App-container">
-        <InputFiel text={text} handleInput={setText} handleSubmit={addTodo}/>
-        <TodoList
-          todos={todos}
-          toggleTodoComplete={toggleTodoComplete}
-          removeTodo={removeTodo}
-        />
+        <InputFiel text={text} 
+          handleInput={setText}
+          handleSubmit={addTask} />
+        <TodoList/>
       </div>
     </div>
   );
