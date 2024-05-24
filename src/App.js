@@ -12,6 +12,7 @@ function App() {
   const [text, setText] = useState("");
 
   const addTask = () => {
+    if(text.trim().length)
     dispatch(addTodo({ text }));
     setText('');
   }
