@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import TodoList from "./components/TodoList";
 import InputFiel from "./components/InputFiel";
-import { addTodo, fetchTodos } from "./components/store/todoSlice";
+import { addNewTodo, fetchTodos } from "./components/store/todoSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -12,7 +12,8 @@ function App() {
   const [text, setText] = useState("");
 
   const handleAction = () => {
-    if (text.trim().length) dispatch(addTodo({ text }));
+    if (text.trim().length) 
+    dispatch(addNewTodo(text));
     setText("");
   };
 
